@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  #service name do statefulset precisa ser o mesmo do name do headless
+  name: mysql-h
+spec:
+  selector:
+    app: mysql
+  type: LoadBalancer
+  ports:
+    - port: 3306
+  # A configuração clusterIP: None indica que este é um serviço headless.
+  # Isso significa que o serviço não terá um IP virtual, permitindo que
+  # os clientes se conectem diretamente a cada pod, o que é essencial
+  # para operações que requerem conhecimento do estado ou da localização dos pods.
+  clusterIP: None
+
